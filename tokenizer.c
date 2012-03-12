@@ -54,7 +54,7 @@ int tokenize(char *string, char split_on, char ***tokens)
    int  token_length = 0;
 
    /* Parse how many tokens and the longest one as well 
-    * TODO: Thing about allocating memory and tokenizing in this loop 
+    * TODO: Think about allocating memory and tokenizing in this loop 
     * instead of in a second one below. */
    while(*tmp)
    {
