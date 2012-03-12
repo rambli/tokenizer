@@ -53,10 +53,12 @@ int tokenize(char *string, char split_on, char ***tokens)
    int longest_token = 0;
    int token_length = 0;
 
-   /* Parse how many tokens and the longest one as well */
+   /* Parse how many tokens and the longest one as well 
+    * TODO: Thing about allocating memory and tokenizing in this loop 
+    * instead of in a second one below. */
    while(*tmp)
    {
-      /* ' ' is the token character */
+      /* split_on is the token character */
       if(split_on == *tmp)
       {
          if(longest_token < token_length)
@@ -80,11 +82,12 @@ int tokenize(char *string, char split_on, char ***tokens)
    }
 
    /* Now allocate space for individual strings in the array */
+   /* TODO: Instead of allocating longest_token length for each token,
+    * allocate only the token length number of bytes */
    int i = 0;
    for(i = 0 ; i < num_tokens ; i++)
    {
       (*tokens)[i] = (char*)malloc(sizeof(char) * longest_token);
-      //printf("Malloc'ed for token %d as %p\n", i+1, (*tokens)[i]);
    }
 
    /* Reset tmp to beginning of string to start extracting tokens */
@@ -106,5 +109,7 @@ int tokenize(char *string, char split_on, char ***tokens)
       i++;
       tmp++;
    }
-   return num_tokens;
+   return (num_tokens);
 }
+
+/* End tokenizer.c */
