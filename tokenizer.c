@@ -48,10 +48,10 @@ int tokenize(char *string, char split_on, char ***tokens)
       return 0;
    }
 
-   char *tmp = string;
-   int num_tokens = 0;
+   char         *tmp = string;
+   int    num_tokens = 0;
    int longest_token = 0;
-   int token_length = 0;
+   int  token_length = 0;
 
    /* Parse how many tokens and the longest one as well 
     * TODO: Thing about allocating memory and tokenizing in this loop 
@@ -69,9 +69,14 @@ int tokenize(char *string, char split_on, char ***tokens)
       token_length++;
       tmp++;
    }
-   num_tokens++;  // to account for the last word
+   /* To account for the last token. Loop above breaks when string ends.. last token will be missed
+    * if token does not end with a separator. */
+   if(longest_token < token_length)
+      longest_token = token_length;
+   /* To account for the last word */
+   num_tokens++;
    
-   printf("\nWe have %d tokens, longest one is %d chars\n", num_tokens, longest_token);
+   //printf("\nWe have %d tokens, longest one is %d chars\n", num_tokens, longest_token);
 
    /* Allocate space to hold array of strings */
    *tokens = (char **)malloc(num_tokens * sizeof(char*));
@@ -99,12 +104,19 @@ int tokenize(char *string, char split_on, char ***tokens)
    while(*tmp && (i < num_tokens))
    {
       int j = 0;
+      if(NULL == (*tokens)[i])
+      {
+         i++;
+         continue;
+      }
       while((split_on != *tmp) && (j < longest_token))
       {
          (*tokens)[i][j] = *tmp;
          j++;
          tmp++;
       }
+      /* Copy the split char as well */
+      (*tokens)[i][j] = *tmp;
       /* Done copying a token, increment i to move to populating the next token */
       i++;
       tmp++;

@@ -17,9 +17,10 @@ void rev_string(char *string)
    }
    int i = 0;
    /* We have the tokens, print them in reverse now */
-   for(i = num_tokens-1; i >= 0; i--)
+   //for(i = num_tokens-1; i >= 0; i--)
+   for(i = 0; i < num_tokens; i++)
    {
-      printf("%s ", tokens[i]);
+      printf("<%s>", tokens[i]);
    }
    free_tokens(tokens, num_tokens);
    return;
