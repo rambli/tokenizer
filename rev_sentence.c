@@ -8,7 +8,7 @@ void rev_string(char *string)
    char **tokens = NULL;
 
    /* Don't directly free tokens, call free_tokens instead */
-   int num_tokens = tokenize(string, 's', &tokens);
+   int num_tokens = tokenize(string, ' ', &tokens);
 
    if(NULL == tokens)
    {
