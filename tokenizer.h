@@ -1,8 +1,6 @@
-
 /**
-* @file tokenizer.c
-* @brief Tokenizer to separate out words in a sentence, split on passed
-*        in character
+* @file tokenizer.h
+* @brief Tokenizer public header file 
 * @author Rohan Ambli
 */
 
